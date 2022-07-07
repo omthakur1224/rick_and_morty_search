@@ -4,7 +4,7 @@
     align-content: left;
     overflow: hidden;
     border-radius: 15px;
-    margin-top: 15px;
+    /* margin-top: 15px; */
 }
 .left{
     display: flex;
@@ -23,14 +23,14 @@
   }
   
   .icon {
-    height: 25px;
-    width: 30px;
+    height: 40px;
+    width: 40px;
 
-    padding: 4px;
+    padding: 10px;
     position: absolute;
     box-sizing:border-box;
     top:50%;
-    left:10%;
+    left:20%;
  
     transform: translateY(-50%);
   }

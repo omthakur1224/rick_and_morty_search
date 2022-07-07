@@ -1,7 +1,5 @@
 import { DATA, NEXT, PREV, TOTAL_OBJ, TOTAL_PAGES} from "./actionTypes.js";
-import { initState, Store } from "./store.js";
-import axios from "axios";
-import thunk from "redux-thunk";
+import { Store } from "./store.js";
 
 export const nextPage=(payload)=>{
     

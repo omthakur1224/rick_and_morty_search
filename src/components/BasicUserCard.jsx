@@ -4,12 +4,16 @@ import { getData, nextPage, prevPage, storeData } from '../redux/action';
 import { Store } from '../redux/store';
 import Pagination from './Pagination'
 import './BasicUserDetail.css'
+import  DetailsUserCard from './DetailsUserCard';
+import { Link,useNavigate } from 'react-router-dom';
+import { Button, Modal } from 'antd';
 function BasicUserCard() {
 
     const [search,setSearch]=useState("")
 
     const inner=useRef();
 
+    const navigate=useNavigate()
     const onSearch = (value) => console.log(value);
 
     const dispatch=useDispatch();
@@ -18,6 +22,7 @@ function BasicUserCard() {
     
     const page=useSelector(Store=>Store.page)
     // console.log("data get",data)
+    const [isModalVisible, setIsModalVisible] = useState(false);
 
     useEffect(()=>{
         dispatch(getData());
@@ -52,22 +57,39 @@ function BasicUserCard() {
           }
       }
  }
+
+ const handleClick=()=>{
+  // navigate('/')
+ }
+const [cardData,setCardData]=useState()
+
+ const showModal = (id) => {
+  setIsModalVisible(true);
+
+ let result=data.filter((ele)=>ele.id==id);
+ setCardData(result);
+};
+console.log("cartData",cardData)
+const handleCancel = () => {
+  setIsModalVisible(false);
+};
+//check from here
+
+
   return (
     <div style={{
 
-       "overflow":"scroll",
+              "overflow":"scroll",
 
-        "width":"100%",
+                "width":"100%",
 
-        "backgroundColor":"white"
+                "backgroundColor":"white"
 
-        }}
+                }} ref={inner}
 
-      ref={inner}
+              onScroll={handleScroll} >
 
-      onScroll={handleScroll} >
-
-        <h1>Rick and Morty Search</h1>
+    <h1>Rick and Morty Search</h1>
         
         <div className="wrapper">
 
@@ -101,12 +123,17 @@ function BasicUserCard() {
                return el;
             }
          }).map((elem )=>
-
-            <div key={elem.id} style={{
+          <>
+            <Button   
+                     type='primary'
+                     key={elem.id}
+                     onClick={()=>showModal(elem.id)}
+                     style={{
                         "display":"flex",
                         "justifyContent":"space-around",
                         "width":"450px",
                         "margin":"auto",
+                        "backgroundColor":"white",
                        "height":"50px",
                        "boxShadow": "rgba(0, 0, 0, 0.16) 0px 1px 4px",
                        }}>
@@ -115,7 +142,9 @@ function BasicUserCard() {
                              <img style={{"width": "30px","height": "30px"}} src={elem.image} alt="image" />
                         </div>  
                         <div>
-                            <h6 style={{"textAlign":"left"}}>{elem.name}</h6>
+                            <h6
+                            //  style={{"textAlign":"left","margin":"auto"}}
+                             >{elem.name}</h6>
                         </div>
                     </div>
 
@@ -124,17 +153,25 @@ function BasicUserCard() {
                     "alignContent":"flex-start"}}>
                         
                         <h6 
-                        style={{"textAlign":"left","margin":"auto"}}
+                        // style={{"textAlign":"left","margin":"auto"}}
                         >
                             <span className={(elem.status==="Alive")? "green" : 
                             (elem.status==="unknown") ?  "grey" : "red"}
                             >. &nbsp;</span> 
                         {elem.status}<span>-</span>{elem.species}</h6>
                     </div>
-              </div>
+              </Button>
+          </>
          )
         }
-    </div> 
+       <Modal width={300} 
+              title={cardData.image}
+              height={150} 
+              footer={null} visible={isModalVisible} onCancel={handleCancel}>
+                <p>Some contents...</p>
+                <p>Some contents...</p>
+        </Modal> 
+    </div>
   </div>
   )
 }
