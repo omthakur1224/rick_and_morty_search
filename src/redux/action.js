@@ -1,4 +1,4 @@
-import { DATA, TOTAL_OBJ, TOTAL_PAGES} from "./actionTypes.js";
+import { DATA, NEXT, PREV, TOTAL_OBJ, TOTAL_PAGES} from "./actionTypes.js";
 import { initState, Store } from "./store.js";
 import { useDispatch } from "react-redux";
 import axios from "axios";
@@ -27,20 +27,20 @@ import thunk from "redux-thunk";
 //     }
 // }
 
-// export const nextPage=(payload)=>{
+export const nextPage=(payload)=>{
     
-//     return {
-//         type:NEXT,
-//         payload
-//     }
-// }
+    return {
+        type:NEXT,
+        payload
+    }
+}
 
-// export const prevPage=(payload)=>{
-//     return {
-//         type:PREV,
-//         payload
-//     }
-// }
+export const prevPage=(payload)=>{
+    return {
+        type:PREV,
+        payload
+    }
+}
 export const storeData=(payload)=>{
     return {
         type:DATA,
@@ -66,16 +66,14 @@ export const getData=()=>async(dispatch)=>{
     // console.log("store.page",Store.getState().page)
 
     //Getting page number from store
-    const Page=Store.getState().page;
+    const page=Store.getState().page;
 
     // Data fetching along with Pagination 
-    let data = await fetch(`https://rickandmortyapi.com/api/character/?name=rick&page=1`);
+    let data = await fetch(`https://rickandmortyapi.com/api/character/?name=rick&page=${page}`);
     let res=await data.json()
       dispatch(storeData(res.results));
       dispatch(totalPages(res.info.pages));
       dispatch(totalObjects(res.info.count))
-
-
     // fetch(`http://localhost:5555/Todos`)
     // .then((res)=>{
     //             return res.json();

@@ -6,6 +6,7 @@ import thunk from "redux-thunk";
 
 export const initState=
 {
+    page:0,
     data:[],
     total_pages:0,
     total_obj:0,

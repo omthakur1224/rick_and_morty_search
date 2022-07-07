@@ -1,4 +1,4 @@
-import {DATA, TOTAL_OBJ, TOTAL_PAGES } from "./actionTypes.js";
+import {DATA, NEXT, PREV, TOTAL_OBJ, TOTAL_PAGES } from "./actionTypes.js";
 export const reducer=(Store,action)=>{
 
     switch(action.type){
@@ -10,6 +10,12 @@ export const reducer=(Store,action)=>{
         
         case TOTAL_PAGES:
             return{...Store, total_pages:action.payload}
+
+         case NEXT:
+            return {...Store,page:Store.page + action.payload};
+
+        case PREV:
+            return {...Store,page:Store.page - action.payload};
 
         default:
             return Store;
