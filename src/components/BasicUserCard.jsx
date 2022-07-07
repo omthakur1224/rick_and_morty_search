@@ -2,12 +2,13 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getData, nextPage, prevPage, storeData } from '../redux/action';
 import { Store } from '../redux/store';
-import { Input, Space } from 'antd';
+// import { Input, Space } from 'antd';
 
 import './BasicUserDetail.css'
 function BasicUserCard() {
 
-    const { Search } = Input;
+    // const { Search } = Input;
+    const [search,setSearch]=useState("")
 
     const inner=useRef();
 
@@ -15,7 +16,7 @@ function BasicUserCard() {
 
     const dispatch=useDispatch();
 
-    const data=useSelector(Store=>Store.data)
+    var data=useSelector(Store=>Store.data)
     
     const page=useSelector(Store=>Store.page)
     // console.log("data get",data)
@@ -23,46 +24,65 @@ function BasicUserCard() {
         dispatch(getData());
     },[])
 
+
+const handleChange=()=>{
+  // let search=e.target.search;
+  // data.filter((elem)=>elem.name.toLowerCase().includes(search.toLowerCase()))
+  // dispatch(storeData(result));
+  // data=result;
+}
+
  const handleScroll=()=>{
-    if (inner.current) {
+  
+    if (inner.current) {  
+
         const { scrollTop, scrollHeight, clientHeight } = inner.current;
-        console.log("iner",inner)
+            console.log("iner",inner)
 
         if (scrollTop + clientHeight >= scrollHeight * 0.98) {
-          console.log("reached bottom");
-         if(page<6) {dispatch(nextPage(1))
-          dispatch(getData());}
-        }
-        else if (scrollTop + clientHeight <= scrollHeight && page>1) {
-          console.log("reached bottom");
 
-        //   if(page>1){
+                 console.log("reached bottom");
+
+         if(page<6) {
+
+                dispatch(nextPage(1))
+
+                dispatch(getData());
+               }
+         }
+      else if (scrollTop + clientHeight <= scrollHeight && page>1) {
+
+          console.log("reached top");
 
               dispatch(prevPage(1))
               dispatch(getData());
-        //   }
-        }
+          }
       }
  }
   return (
     <div style={{
-        // "display":"flex",
-        // "flexDirection":"column",
-        "overflow":"scroll",
-        // "gap":"2px",
+
+       "overflow":"scroll",
+
         "width":"100%",
-        "backgroundColor":"#f5f6f8"
-        // "height":"300px",
-        // "margin":"auto"
-      }}
+
+        "backgroundColor":"white"
+
+        }}
+
       ref={inner}
+
       onScroll={handleScroll} >
 
         <h1>Rick and Morty Search</h1>
       
         <div className="wrapper">
+
             <img className="icon" src="https://cdn0.iconfinder.com/data/icons/TWG_Retina_Icons/64/magnifier.png" alt="" />
-            <input placeholder='search for a contact' className="search" type='search'></input>
+
+            <input placeholder='search for a contact' className="search" type='text'
+             onChange={(e)=>setSearch(e.target.value)}></input>
+
         </div> 
 
 
@@ -79,8 +99,15 @@ function BasicUserCard() {
         //   ref={inner}
         //   onScroll={handleScroll} 
         >
-         {
-            data.map((elem )=>
+         {  data.filter((el)=>{
+            if(search===""){
+              return el;
+            }
+            else if(el.name.toLowerCase().includes(search.toLowerCase())){
+              
+               return el;
+            }
+         }).map((elem )=>
 
             <div key={elem.id} style={{
                         "display":"flex",
@@ -88,8 +115,7 @@ function BasicUserCard() {
                         "width":"450px",
                         "margin":"auto",
                        "height":"50px",
-                       
-                        "boxShadow": "rgba(0, 0, 0, 0.16) 0px 1px 4px",
+                       "boxShadow": "rgba(0, 0, 0, 0.16) 0px 1px 4px",
                        }}>
                     <div className='left'>
                         <div className='avtara'>
