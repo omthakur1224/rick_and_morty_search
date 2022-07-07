@@ -61,15 +61,21 @@ function BasicUserCard() {
  const handleClick=()=>{
   // navigate('/')
  }
+
 const [cardData,setCardData]=useState()
 
  const showModal = (id) => {
-  setIsModalVisible(true);
 
- let result=data.filter((ele)=>ele.id==id);
- setCardData(result);
+      setIsModalVisible(true);
+      let result=data.filter((ele)=>ele.id==id);
+      setCardData(result);
 };
+
+
 console.log("cartData",cardData)
+
+
+
 const handleCancel = () => {
   setIsModalVisible(false);
 };
@@ -127,7 +133,10 @@ const handleCancel = () => {
             <Button   
                      type='primary'
                      key={elem.id}
-                     onClick={()=>showModal(elem.id)}
+                     onClick={()=>{
+                      setIsModalVisible(true);
+                      showModal(elem.id)
+                     }}
                      style={{
                         "display":"flex",
                         "justifyContent":"space-around",
@@ -165,7 +174,7 @@ const handleCancel = () => {
          )
         }
        <Modal width={300} 
-              title={cardData.image}
+              title={""}
               height={150} 
               footer={null} visible={isModalVisible} onCancel={handleCancel}>
                 <p>Some contents...</p>
