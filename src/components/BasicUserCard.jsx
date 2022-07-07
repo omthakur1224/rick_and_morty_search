@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getData, nextPage, prevPage, storeData } from '../redux/action';
 import { Store } from '../redux/store';
 // import { Input, Space } from 'antd';
+import 'antd/dist/antd.css';
+import { Pagination } from 'antd';
 
 import './BasicUserDetail.css'
 function BasicUserCard() {
@@ -75,7 +77,7 @@ const handleChange=()=>{
       onScroll={handleScroll} >
 
         <h1>Rick and Morty Search</h1>
-      
+        
         <div className="wrapper">
 
             <img className="icon" src="https://cdn0.iconfinder.com/data/icons/TWG_Retina_Icons/64/magnifier.png" alt="" />
@@ -85,6 +87,21 @@ const handleChange=()=>{
 
         </div> 
 
+        <button className='pagination' disabled={page<2?true:false} 
+                        onClick={()=>{
+                                  dispatch(prevPage(1));
+                                  dispatch(getData());
+                                }}
+                >Prev </button>
+
+                <span> &nbsp;&nbsp;{page}&nbsp;&nbsp; </span>
+
+                <button className='pagination' disabled={data.length<20?true:false} 
+                        onClick={()=>{
+                                  dispatch(nextPage(1));
+                                  dispatch(getData());
+                                }}
+        > Next</button>
 
         <div style={{
             "display":"flex",
@@ -146,21 +163,7 @@ const handleChange=()=>{
         <Button variant='contained'
                        >Know more here</Button>
                 </Link> */}
-                {/* <button disabled={page<2?true:false} 
-                        onClick={()=>{
-                                  dispatch(prevPage(1));
-                                  dispatch(getData());
-                                }}
-                >Prev </button>
-
-                <span>{page}</span>
-
-                <button disabled={data.length<20?true:false} 
-                        onClick={()=>{
-                                  dispatch(nextPage(1));
-                                  dispatch(getData());
-                                }}
-                >Next</button> */}
+               
     </div>
   )
 }

@@ -56,3 +56,9 @@
     color: red;
     font-size: 2rem;
   }
+  .pagination{
+   background-color: white;
+   /* border: 1px solid black; */
+   box-shadow: none;
+   margin-bottom: 10px;
+  }
