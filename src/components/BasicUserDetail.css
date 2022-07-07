@@ -1,0 +1,13 @@
+.avtara{
+    width: 30px;
+    height: 30px;
+    align-content: left;
+    overflow: hidden;
+    border-radius: 15px;
+    margin-top: 15px;
+}
+.left{
+    display: flex;
+    gap: 15px;
+    text-align: center;
+   }
