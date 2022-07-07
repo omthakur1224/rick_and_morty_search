@@ -2,14 +2,10 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getData, nextPage, prevPage, storeData } from '../redux/action';
 import { Store } from '../redux/store';
-// import { Input, Space } from 'antd';
-import 'antd/dist/antd.css';
-import { Pagination } from 'antd';
-
+import Pagination from './Pagination'
 import './BasicUserDetail.css'
 function BasicUserCard() {
 
-    // const { Search } = Input;
     const [search,setSearch]=useState("")
 
     const inner=useRef();
@@ -22,17 +18,12 @@ function BasicUserCard() {
     
     const page=useSelector(Store=>Store.page)
     // console.log("data get",data)
+
     useEffect(()=>{
         dispatch(getData());
     },[])
 
-
-const handleChange=()=>{
-  // let search=e.target.search;
-  // data.filter((elem)=>elem.name.toLowerCase().includes(search.toLowerCase()))
-  // dispatch(storeData(result));
-  // data=result;
-}
+//function for handling scrolling
 
  const handleScroll=()=>{
   
@@ -82,39 +73,24 @@ const handleChange=()=>{
 
             <img className="icon" src="https://cdn0.iconfinder.com/data/icons/TWG_Retina_Icons/64/magnifier.png" alt="" />
 
-            <input placeholder='search for a contact' className="search" type='text'
-             onChange={(e)=>setSearch(e.target.value)}></input>
+            <input placeholder='search for a contact' className="search"
+             type='text'
+             onChange={(e)=>setSearch(e.target.value)}/>
 
-        </div> 
+          </div> 
 
-        <button className='pagination' disabled={page<2?true:false} 
-                        onClick={()=>{
-                                  dispatch(prevPage(1));
-                                  dispatch(getData());
-                                }}
-                >Prev </button>
-
-                <span> &nbsp;&nbsp;{page}&nbsp;&nbsp; </span>
-
-                <button className='pagination' disabled={data.length<20?true:false} 
-                        onClick={()=>{
-                                  dispatch(nextPage(1));
-                                  dispatch(getData());
-                                }}
-        > Next</button>
+       <Pagination/>
 
         <div style={{
             "display":"flex",
             "flexDirection":"column",
-            // "overflow":"scroll",
             "gap":"2px",
             "width":"450px",
             "height":"300px",
             "margin":"auto",
             "backgroundColor":"white"
           }}
-        //   ref={inner}
-        //   onScroll={handleScroll} 
+   
         >
          {  data.filter((el)=>{
             if(search===""){
@@ -159,12 +135,7 @@ const handleChange=()=>{
          )
         }
     </div> 
-        {/* <Link className='link' to={`/job_desc/${elem.id}`}>
-        <Button variant='contained'
-                       >Know more here</Button>
-                </Link> */}
-               
-    </div>
+  </div>
   )
 }
 

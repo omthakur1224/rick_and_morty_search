@@ -13,7 +13,7 @@
    }
    .wrapper {
        width: 450px;
-       /* border: 1px solid red; */
+
        height: 50px;
        margin: auto;
        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
@@ -25,13 +25,13 @@
   .icon {
     height: 25px;
     width: 30px;
-    /* background-color: red; */
+
     padding: 4px;
     position: absolute;
     box-sizing:border-box;
     top:50%;
     left:10%;
-    /* border: 1px solid green; */
+ 
     transform: translateY(-50%);
   }
   
@@ -42,7 +42,7 @@
     margin-top: 15px;
     outline: none;
     border: none;
-       /* border: 1px solid blueviolet; */
+  
   }
   .green{
     color: green;
@@ -58,7 +58,6 @@
   }
   .pagination{
    background-color: white;
-   /* border: 1px solid black; */
    box-shadow: none;
    margin-bottom: 10px;
   }
