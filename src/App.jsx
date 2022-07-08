@@ -6,10 +6,10 @@ import {Routes,Route} from 'react-router-dom'
 function App() {
   return (
     <div className="App">
-      {/* <BasicUserCard/> */}
+      <BasicUserCard/>
       <Routes>
-        <Route path={'/'} element={<BasicUserCard/>}/>
-        <Route path={'/'} element={<DetailsUserCard/>} />
+        {/* <Route path={'/'} element={<BasicUserCard/>}/>
+        <Route path={'/'} element={<DetailsUserCard/>} /> */}
       </Routes>
     </div>
   );

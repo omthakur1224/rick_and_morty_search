@@ -6,6 +6,8 @@ import Pagination from './Pagination'
 import './BasicUserDetail.css'
 import  DetailsUserCard from './DetailsUserCard';
 import { Link,useNavigate } from 'react-router-dom';
+import 'antd/dist/antd.css';
+
 import { Button, Modal } from 'antd';
 function BasicUserCard() {
 
@@ -66,9 +68,9 @@ const [cardData,setCardData]=useState([])
 
  const showModal = (id) => {
 
-   let result=data.filter((ele)=>ele.id==id);
-   setCardData(result);
-   setIsModalVisible(true);
+      setIsModalVisible(true);
+      let result=data.filter((ele)=>ele.id==id);
+      setCardData(result);
 };
 
 
@@ -117,20 +119,18 @@ const handleCancel = () => {
             "height":"300px",
             "margin":"auto",
             "backgroundColor":"white"
-          }}
-   
-        >
-         {  data.filter((el)=>{
-            if(search===""){
-              return el;
-            }
-            else if(el.name.toLowerCase().includes(search.toLowerCase())){
-              
-               return el;
-            }
-         }).map((elem )=>
-          <>
-            <Button   
+          }}>
+              {  data.filter((el)=>{
+                  if(search===""){
+                    return el;
+                  }
+                  else if(el.name.toLowerCase().includes(search.toLowerCase())){
+                    
+                    return el;
+                  }
+              }).map((elem )=>
+            <>
+               <Button   
                      type='primary'
                      key={elem.id}
                      onClick={()=>{
@@ -148,54 +148,46 @@ const handleCancel = () => {
                        }}>
                     <div className='left'>
                         <div className='avtara'>
-                             <img style={{"width": "30px","height": "30px"}} src={elem.image} alt="image" />
+                            <img style={{"width": "30px","height": "30px"}} src={elem.image} alt="image" />
                         </div>  
+
                         <div>
-                            <h6
-                            //  style={{"textAlign":"left","margin":"auto"}}
-                             >{elem.name}</h6>
+                           <h6>{elem.name}</h6>
                         </div>
                     </div>
 
                     <div style={{'display':"flex",
-                    "alignItems":"left",
-                    "alignContent":"flex-start"}}>
+                              "alignItems":"left",
+                              "alignContent":"flex-start"}}>
                         
-                        <h6 
-                        // style={{"textAlign":"left","margin":"auto"}}
-                        >
-                            <span className={(elem.status==="Alive")? "green" : 
-                            (elem.status==="unknown") ?  "grey" : "red"}
-                            >. &nbsp;</span> 
-                        {elem.status}<span>-</span>{elem.species}</h6>
+                        <h6>
+                          <span className={
+                            (elem.status==="Alive")? "green" 
+                            :(elem.status==="unknown") 
+                            ?"grey" : "red"}
+                            >. &nbsp;
+                          </span> 
+                          {elem.status}<span>-</span>{elem.species}</h6>
                     </div>
               </Button>
           </>
          )
         }
-       { cardData[0]!==undefined ? <Modal width={300} 
-              // title={cardData[0].image}
+
+{/* popup user detail */}
+
+       {cardData[0]!==undefined? <DetailsUserCard cardData={cardData} 
+                        isModalVisible={isModalVisible} 
+                        setIsModalVisible={setIsModalVisible}
+                        />:""}
+
+       {/* <Modal width={300} 
+              title={""}
               height={150} 
               footer={null} visible={isModalVisible} onCancel={handleCancel}>
-               <div>
-                  <div> 
-                      <img src={cardData[0].image} alt="" />
-                  </div>
-                  <div>
-                    <h6>
-                      <span className={
-                        cardData[0].status==="Alive" ? "green" 
-                        :(cardData[0].status==="unknown") 
-                        ?"grey" : "red"}>
-                      .</span>
-
-                      <span>{cardData[0].status}</span>
-                      <span>{cardData[0].name}</span>
-                    </h6>
-                  </div>
-               </div>
-               <div></div>
-        </Modal>:"" }
+                <p>Some contents...</p>
+                <p>Some contents...</p>
+        </Modal>  */}
     </div>
   </div>
   )
