@@ -20,7 +20,7 @@ function Pagination() {
 
                 <span> &nbsp;&nbsp;{page}&nbsp;&nbsp; </span>
 
-                <Button style={{"width":"100px", "height":"40px"}} className='pagination' disabled={data.length<20?true:false} 
+                <Button style={{"width":"100px", "height":"40px"}} className='pagination' disabled={page==6||data.length<20?true:false} 
                         onClick={()=>{
                                   dispatch(nextPage(1));
                                   dispatch(getData());
