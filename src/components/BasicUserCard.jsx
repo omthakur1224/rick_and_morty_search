@@ -62,13 +62,13 @@ function BasicUserCard() {
   // navigate('/')
  }
 
-const [cardData,setCardData]=useState()
+const [cardData,setCardData]=useState([])
 
  const showModal = (id) => {
 
-      setIsModalVisible(true);
-      let result=data.filter((ele)=>ele.id==id);
-      setCardData(result);
+   let result=data.filter((ele)=>ele.id==id);
+   setCardData(result);
+   setIsModalVisible(true);
 };
 
 
@@ -173,13 +173,29 @@ const handleCancel = () => {
           </>
          )
         }
-       <Modal width={300} 
-              title={""}
+       { cardData[0]!==undefined ? <Modal width={300} 
+              // title={cardData[0].image}
               height={150} 
               footer={null} visible={isModalVisible} onCancel={handleCancel}>
-                <p>Some contents...</p>
-                <p>Some contents...</p>
-        </Modal> 
+               <div>
+                  <div> 
+                      <img src={cardData[0].image} alt="" />
+                  </div>
+                  <div>
+                    <h6>
+                      <span className={
+                        cardData[0].status==="Alive" ? "green" 
+                        :(cardData[0].status==="unknown") 
+                        ?"grey" : "red"}>
+                      .</span>
+
+                      <span>{cardData[0].status}</span>
+                      <span>{cardData[0].name}</span>
+                    </h6>
+                  </div>
+               </div>
+               <div></div>
+        </Modal>:"" }
     </div>
   </div>
   )
