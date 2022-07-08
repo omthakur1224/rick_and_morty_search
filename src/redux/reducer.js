@@ -1,4 +1,5 @@
 import {DATA, NEXT, PREV, TOTAL_OBJ, TOTAL_PAGES } from "./actionTypes.js";
+
 export const reducer=(Store,action)=>{
 
     switch(action.type){

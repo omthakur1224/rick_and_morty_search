@@ -50,7 +50,7 @@ function BasicUserCard() {
                 dispatch(getData());
                }
          }
-      else if (scrollTop + clientHeight <= scrollHeight && page>1) {
+      else if (scrollTop + clientHeight >= scrollHeight *0.98 && page>1 ) {
 
           console.log("reached top");
 

@@ -9,10 +9,6 @@ function App() {
     <div className="App">
       <Pagination/>
       <BasicUserCard/>
-      {/* <Routes> */}
-        {/* <Route path={'/'} element={<BasicUserCard/>}/>
-        <Route path={'/'} element={<DetailsUserCard/>} /> */}
-      {/* </Routes> */}
     </div>
   );
 }
