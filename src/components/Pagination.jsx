@@ -1,3 +1,4 @@
+import { Button } from 'antd';
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { getData, nextPage, prevPage } from '../redux/action';
@@ -8,23 +9,24 @@ function Pagination() {
   
   const {page,data}=useSelector(Store=>Store)
   return (
-    <>
-         <button className='pagination' disabled={page<2?true:false} 
+    <div style={{'display':"flex","justifyContent":"flex-end","marginTop":"10px",}}>
+
+         <Button style={{"width":"100px", "height":"40px"}} className='pagination' disabled={page<2?true:false} 
                         onClick={()=>{
                                   dispatch(prevPage(1));
                                   dispatch(getData());
                                 }}
-                >Prev </button>
+                >Prev </Button>
 
                 <span> &nbsp;&nbsp;{page}&nbsp;&nbsp; </span>
 
-                <button className='pagination' disabled={data.length<20?true:false} 
+                <Button style={{"width":"100px", "height":"40px"}} className='pagination' disabled={data.length<20?true:false} 
                         onClick={()=>{
                                   dispatch(nextPage(1));
                                   dispatch(getData());
                                 }}
-        > Next</button>
-    </>
+        > Next</Button>
+    </div>
   )
 }
 

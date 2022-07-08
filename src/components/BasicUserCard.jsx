@@ -90,6 +90,8 @@ const handleCancel = () => {
               "overflow":"scroll",
 
                 "width":"100%",
+                
+                "height":"100vh",
 
                 "backgroundColor":"white"
 
@@ -99,6 +101,8 @@ const handleCancel = () => {
 
     <h1>Rick and Morty Search</h1>
         
+  {/* code for searchbar     */}
+
         <div className="wrapper">
 
             <img className="icon" src="https://cdn0.iconfinder.com/data/icons/TWG_Retina_Icons/64/magnifier.png" alt="" />
@@ -109,9 +113,9 @@ const handleCancel = () => {
 
           </div> 
 
-       <Pagination/>
+{/* mapping data for displaying data*/}
 
-        <div style={{
+         <div style={{
             "display":"flex",
             "flexDirection":"column",
             "gap":"2px",
@@ -131,7 +135,7 @@ const handleCancel = () => {
               }).map((elem )=>
             <>
                <Button   
-                     type='primary'
+                     type='contained'
                      key={elem.id}
                      onClick={()=>{
                       setIsModalVisible(true);
@@ -140,12 +144,15 @@ const handleCancel = () => {
                      style={{
                         "display":"flex",
                         "justifyContent":"space-around",
+                        "alignContent":"center",
+                        "alignItems":"center",
                         "width":"450px",
-                        "margin":"auto",
+                        // "margin":"auto",
                         "backgroundColor":"white",
                        "height":"50px",
                        "boxShadow": "rgba(0, 0, 0, 0.16) 0px 1px 4px",
                        }}>
+
                     <div className='left'>
                         <div className='avtara'>
                             <img style={{"width": "30px","height": "30px"}} src={elem.image} alt="image" />
@@ -156,11 +163,15 @@ const handleCancel = () => {
                         </div>
                     </div>
 
-                    <div style={{'display':"flex",
-                              "alignItems":"left",
-                              "alignContent":"flex-start"}}>
+                    <div style={{
+                      'display':"flex",
+                      "textAlign":"center",
+                      "justifyContent":"center"
+                    
+                              }}>
                         
-                        <h6>
+                        <h6 style={{ "marginBottom":"10px" , "textAlign":"center"}}
+                        >
                           <span className={
                             (elem.status==="Alive")? "green" 
                             :(elem.status==="unknown") 
@@ -173,21 +184,13 @@ const handleCancel = () => {
           </>
          )
         }
-
+       
 {/* popup user detail */}
 
        {cardData[0]!==undefined? <DetailsUserCard cardData={cardData} 
                         isModalVisible={isModalVisible} 
                         setIsModalVisible={setIsModalVisible}
                         />:""}
-
-       {/* <Modal width={300} 
-              title={""}
-              height={150} 
-              footer={null} visible={isModalVisible} onCancel={handleCancel}>
-                <p>Some contents...</p>
-                <p>Some contents...</p>
-        </Modal>  */}
     </div>
   </div>
   )

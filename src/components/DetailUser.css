@@ -1,5 +1,6 @@
-.grid{
-    display: grid;
-    grid-template-columns: repeat(2,50px);
-    grid-gap: 10px;
+.image{
+    width: 70px;
+    height: 70px;
+    /* overflow: hidden; */
+    border-radius: 35px;
 }
